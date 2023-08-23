@@ -13,14 +13,14 @@ pipeline {
             steps {
                 // Set up environment (install dependencies, etc.)
                 sh 'pip install -r requirements.txt' // Install Python dependencies
+                sh 'webdrivermanager chrome' // Install Chrome WebDriver
             }
         }
 
         stage('Run Tests') {
             steps {
                 // Run your Selenium tests
-                sh 'export webdriver.chrome.driver=/path/to/chromedriver'
-                sh 'python3 test.py'
+                sh 'python test.py'
             }
         }
     }
