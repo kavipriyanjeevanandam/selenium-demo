@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+      stage('Install Pip') {
+            steps {
+                sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
+                sh 'python get-pip.py'
+            }
+        }
         stage('Checkout') {
             steps {
                 // Checkout the code from your Git repository
