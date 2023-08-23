@@ -19,6 +19,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Run your Selenium tests
+                sh 'export webdriver.chrome.driver=/path/to/chromedriver'
                 sh 'python3 test.py'
             }
         }
