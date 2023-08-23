@@ -13,7 +13,6 @@ pipeline {
             steps {
                 // Set up environment (install dependencies, etc.)
                 sh 'pip install -r requirements.txt' // Install Python dependencies
-                sh 'webdrivermanager chrome' // Install Chrome WebDriver
             }
         }
 
