@@ -14,12 +14,22 @@ pipeline {
                 sh '''
                     . /var/jenkins_home/venv/bin/activate
                     pip install -r requirements.txt
-                    python3 test.py
-                    deactivate
+                    
                 '''
                 
             }
         }
+
+        stage('Run Tests') {
+            steps {
+                sh '''
+                    . /var/jenkins_home/venv/bin/activate
+                    python3 test.py
+                    deactivate
+                '''
+            }
+        }
+
     }
 
 }
