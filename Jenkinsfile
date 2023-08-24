@@ -22,13 +22,4 @@ pipeline {
 
     }
 
-    post {
-        always {
-            // Archive the JUnit XML report as a build artifact
-            archiveArtifacts artifacts: 'test-reports/**/*.xml', allowEmptyArchive: true
-
-            // Publish JUnit test results using the Jenkins JUnit Plugin
-            junit 'test-reports/**/*.xml'
-        }
-    }
 }

@@ -43,16 +43,3 @@ class ExampleWebsiteTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    import xmlrunner
-    import os
-
-    # Specify the full path for the test-reports directory
-    report_dir = os.path.abspath('test-reports')
-
-    if not os.path.exists(report_dir):
-        os.makedirs(report_dir)
-
-    unittest.main(
-        testRunner=xmlrunner.XMLTestRunner(output=report_dir),
-        failfast=False, buffer=False, catchbreak=False
-    )
