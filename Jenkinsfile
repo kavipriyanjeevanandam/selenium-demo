@@ -12,7 +12,7 @@ pipeline {
             steps {
                  // Activate the virtual environment
                 sh '''
-                    source /var/jenkins_home/venv/bin/activate
+                    . /var/jenkins_home/venv/bin/activate
                 '''
                 sh 'pip install -r requirements.txt' // Install Python dependencies
             }
