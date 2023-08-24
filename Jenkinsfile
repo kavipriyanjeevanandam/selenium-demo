@@ -10,7 +10,7 @@ pipeline {
         
         stage('Setup Environment') {
             steps {
-                sh 'pip install -r requirements.txt' // Install Python dependencies
+                sh 'pip install -r requirements.txt --junitxml=test-reports/results.xml' // Install Python dependencies
             }
         }
 
@@ -29,14 +29,11 @@ pipeline {
 
     post {
         always {
-            // Publish Allure HTML Report
-            allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results']]
-            ])
+            // Archive the JUnit XML report as a build artifact
+            archiveArtifacts artifacts: 'test-reports/**/*.xml', allowEmptyArchive: true
+
+            // Publish JUnit test results using the Jenkins JUnit Plugin
+            junit 'test-reports/**/*.xml'
         }
     }
 }
