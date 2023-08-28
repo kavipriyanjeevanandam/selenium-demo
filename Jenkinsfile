@@ -9,7 +9,7 @@ pipeline {
         }
     stage('Test') {
       steps{
-      sh 'docker create network ml_network'
+      sh 'docker network create ml_network'
       sh 'docker run -p 80:80 --name frontend kavipriyanjeevanandam/ml-angular:0.1 --network ml_network'
       sh 'docker run -d -p 5000:5000 --name backend --network ml_network  kavipriyanjeevanandam/ml-flask:0.1'
       sh 'docker run -d --name seleniumenv --network ml_network selenium/standalone-chrome'
