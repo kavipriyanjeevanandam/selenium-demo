@@ -11,8 +11,8 @@ pipeline {
       steps{
       sh 'docker-compose build'
       sh 'docker-compose up -d'
-      sh 'docker cp . selenium/standalone-chrome:/app'
-      sh 'docker-compose exec selenium-tests python your_selenium_script.py'
+      sh 'docker cp test.py selenium/standalone-chrome:/app'
+      sh 'docker-compose exec selenium/standalone-chrome python test.py'
       }
     }
   }
