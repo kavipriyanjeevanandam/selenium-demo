@@ -1,35 +1,25 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
+  agent none
+  stages {
+    stage('Checkout') {
             steps {
+                // Checkout code from version control
                 checkout scm
             }
         }
-        
-        stage('Setup Environment') {
-            steps {
-                 // Activate the virtual environment
-                sh '''
-                    . /var/jenkins_home/venv/bin/activate
-                    pip install -r requirements.txt
-                    
-                '''
-                
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh '''
-                    . /var/jenkins_home/venv/bin/activate
-                    python3 test.py
-                    deactivate
-                '''
-            }
-        }
-
+    stage('Test') {
+      steps{
+      sh 'docker-compose build'
+      sh 'docker-compose up -d'
+      sh 'docker cp . selenium/standalone-chrome:/app'
+      sh 'docker-compose exec selenium-tests python your_selenium_script.py'
+      }
     }
-
+  }
+  post {
+        always {
+            // Stop and remove all containers
+            sh 'docker-compose down'
+        }
+    }
 }
