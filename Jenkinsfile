@@ -9,17 +9,18 @@ pipeline {
         }
     stage('Test') {
       steps{
-      sh 'docker-compose build'
-      sh 'docker-compose up -d'
-      sh 'docker cp test.py selenium/standalone-chrome:/app'
-      sh 'docker-compose exec selenium/standalone-chrome python test.py'
+      sh 'docker create network ml_network'
+      sh 'docker run -p 80:80 --name frontend kavipriyanjeevanandam/ml-angular:0.1 --network ml_network'
+      sh 'docker run -d -p 5000:5000 --name backend --network ml_network  kavipriyanjeevanandam/ml-flask:0.1'
+      sh 'docker run -d --name seleniumenv --network ml_network selenium/standalone-chrome'
+      sh 'docker exec seleniumenv python test.py'
       }
     }
   }
   post {
         always {
             // Stop and remove all containers
-            sh 'docker-compose down'
+            sh 'docker stop --all'
         }
     }
 }
