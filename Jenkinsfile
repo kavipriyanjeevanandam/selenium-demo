@@ -20,7 +20,10 @@ pipeline {
   post {
         always {
             // Stop and remove all containers
-            sh 'docker stop --all'
+            sh 'docker stop $(docker ps -a -q)'
+sh 'docker rm $(docker ps -a -q)'
+sh 'docker rmi $(docker images -a -q)'
+sh 'docker network rm ml_network'
         }
     }
 }
