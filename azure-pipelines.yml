@@ -17,7 +17,7 @@ steps:
     Inline: |
       $jsonAlert =  ${{ convertToJson(parameters.azdevops) }}
      
-      Write-Host  "$jsonAlert"
+      Write-Host  "$jsonAlert.toString()"
     azurePowerShellVersion: 'LatestVersion'
 
 
