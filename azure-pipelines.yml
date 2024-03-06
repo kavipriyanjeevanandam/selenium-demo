@@ -15,7 +15,7 @@ steps:
     azureSubscription: 'keyvault-fl'
     ScriptType: 'InlineScript'
     Inline: |
-      Write-Host ${{ parameters.azdevops.data.essentials.alaertTargetIDs[0] }}
+      Write-Host ${{ parameters.azdevops.data }}
     azurePowerShellVersion: 'LatestVersion'
 
 
