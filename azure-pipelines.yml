@@ -23,6 +23,7 @@ steps:
      $vmName = $matches[2]
      Write-Host "Resource Group Name: $resourceGroupName"
      Write-Host "VM Name: $vmName"
+     Stop-AzVM -ResourceGroupName $resourceGroupName -Name $vmName -Force
      }
      else {
      Write-Host "No match found in the input string."
