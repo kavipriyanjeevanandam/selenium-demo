@@ -16,7 +16,7 @@ steps:
     azureSubscription: 'keyvault-fl'
     ScriptType: 'InlineScript'
     Inline: |
-     $jsonAlert =  ${{ parameters.azdevops.data.essentials.alertTargetIDs[0] }}
+     $jsonAlert =  "${{ parameters.azdevops.data.essentials.alertTargetIDs[0] }}"
      Write-Host "json : $jsonAlert"
      
     azurePowerShellVersion: 'LatestVersion'
