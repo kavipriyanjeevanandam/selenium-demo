@@ -17,6 +17,7 @@ steps:
     ScriptType: 'InlineScript'
     Inline: |
      $jsonAlert =  "${{ parameters.azdevops.data.essentials.alertTargetIDs[0] }}"
+     Write-Host "json: $jsonAlert"
      $pattern = "/subscriptions/[^/]+/resourcegroups/([^/]+)/providers/microsoft.compute/virtualmachines/([^/]+)"
      if ($jsonAlert -match $pattern) {
      $resourceGroupName = $matches[1]
