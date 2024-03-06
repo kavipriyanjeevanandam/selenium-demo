@@ -15,7 +15,7 @@ steps:
     azureSubscription: 'keyvault-fl'
     ScriptType: 'InlineScript'
     Inline: |
-      $jsonAlert =  ${{ convertToJson(parameters.azdevops.data) }}
+      $jsonAlert =  ${{ convertToJson(parameters.azdevops) }}
       $vmResourceId = $jsonAlert.data.essentials.alertTargetIDs[0]
       $vmName = ($vmResourceId -split '/')[-1]
       $resourceGroup = ($vmResourceId -split '/')[4]
