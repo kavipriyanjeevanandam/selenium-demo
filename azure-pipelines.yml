@@ -17,7 +17,11 @@ steps:
     ScriptType: 'InlineScript'
     Inline: |
      $jsonAlert =  "${{ parameters.azdevops.data.essentials.alertTargetIDs[0] }}"
+     $vmName = ($vmResourceId -split '/')[(-1)]
+     $resourceGroupName = ($vmResourceId -split '/')[3]
      Write-Host "json : $jsonAlert"
+     Write-Host "VM : $vmName"
+     Write-Host "ResourceGroup : $resourceGroupName"
      
     azurePowerShellVersion: 'LatestVersion'
     
