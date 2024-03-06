@@ -17,11 +17,16 @@ steps:
     ScriptType: 'InlineScript'
     Inline: |
      $jsonAlert =  "${{ parameters.azdevops.data.essentials.alertTargetIDs[0] }}"
-     $vmName = ($vmResourceId -split '/')[(-1)]
-     $resourceGroupName = ($vmResourceId -split '/')[3]
-     Write-Host "json : $jsonAlert"
-     Write-Host "VM : $vmName"
-     Write-Host "ResourceGroup : $resourceGroupName"
+     $pattern = "/subscriptions/[^/]+/resourcegroups/([^/]+)/providers/microsoft.compute/virtualmachines/([^/]+)"
+     if ($jsonAlert -match $pattern) {
+     $resourceGroupName = $matches[1]
+     $vmName = $matches[2]
+     Write-Host "Resource Group Name: $resourceGroupName"
+     Write-Host "VM Name: $vmName"
+     }
+     else {
+     Write-Host "No match found in the input string."
+     }
      
     azurePowerShellVersion: 'LatestVersion'
     
