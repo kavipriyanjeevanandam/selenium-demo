@@ -19,7 +19,7 @@ steps:
       $vmResourceId = $jsonAlert.essentials.alertTargetIDs[0]
       $vmName = ($vmResourceId -split '/')[-1]
       $resourceGroup = ($vmResourceId -split '/')[4]
-      Stop-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Force
+      Write-Host $vmName
     azurePowerShellVersion: 'LatestVersion'
 
 
