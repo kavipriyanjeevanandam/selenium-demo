@@ -15,11 +15,7 @@ steps:
     azureSubscription: 'keyvault-fl'
     ScriptType: 'InlineScript'
     Inline: |
-      $jsonAlert =  ${{ parameters.azdevops.data }}
-      $vmResourceId = $jsonAlert.essentials.alertTargetIDs[0]
-      $vmName = ($vmResourceId -split '/')[-1]
-      $resourceGroup = ($vmResourceId -split '/')[4]
-      Write-Host $vmName
+      Write- Host ${{ parameters.azdevops.data.essentials.alaertTargetIDs[0] }}
     azurePowerShellVersion: 'LatestVersion'
 
 
