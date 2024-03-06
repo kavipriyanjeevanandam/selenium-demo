@@ -17,7 +17,7 @@ steps:
     Inline: |
       $jsonAlert =  ${{parameters.azdevops.data.essentials.alertTargetIDs[0]}}
      
-      Write-Host  "$jsonAlert.toString()"
+      Write-Host  "$jsonAlert"
     azurePowerShellVersion: 'LatestVersion'
 
 
