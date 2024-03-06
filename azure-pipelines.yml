@@ -10,18 +10,14 @@ resources:
       connection: azdevops
 
 steps:
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'inline'
-    script: |
-      import json
-      json_string = json.dumps(${{ convertToJson(parameters.azdevops) }})
-      print(json_string)
+
 - task: AzurePowerShell@5
   inputs:
     azureSubscription: 'keyvault-fl'
     ScriptType: 'InlineScript'
     Inline: |
+     $jsonAlert =  ${{ parameters.azdevops.data.essentials.alertTargetIDs[0] }}
+     Write-Host "json : $jsonAlert"
      
     azurePowerShellVersion: 'LatestVersion'
     
